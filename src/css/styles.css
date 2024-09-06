@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../img/catbg1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    text-align: center;
+    border: 1px solid #f49dff;
+    padding: 20px;
+    background-color: #ffd06a;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+form {
+    margin: 20px 0;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffaef6;
+    color: #812bc4;
+    font-size: 16px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #eb7ddb;
+}
