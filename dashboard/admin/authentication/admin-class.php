@@ -1,5 +1,3 @@
-
-
 <?php
 require_once __DIR__. '/../../../database/dbconnection.php';
 include_once __DIR__. '/../../../config/settings-configuration.php';
@@ -242,35 +240,40 @@ class ADMIN
                 exit;
             }
             unset($_SESSION['csrf_token']);
-
+    
             $stmt = $this->conn->prepare("SELECT * FROM user WHERE email = :email AND status = :status");
             $stmt->execute(array(":email" => $email, ":status" => "active"));
             $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($userRow->rowCount() == 1) {
-                if ($userRow('status' == "active")) {
+    
+            if ($stmt->rowCount() == 1) {
+                // Corrected this line:
+                if ($userRow['status'] == "active") {
                     if ($userRow['password'] == md5($password)) {
                         $activity = "Has Successfully signed in ";
                         $user_id = $userRow['id'];
                         $this->logs($activity, $user_id);
-
+    
                         $_SESSION['adminSession'] = $user_id;
-
-                        echo "<script>alert('welcome.'); window.location.href = '../';</script>";
+    
+                        echo "<script>alert('Welcome.'); window.location.href = 'http://localhost/ITELEC2-V2/dashboard/admin/authentication/';</script>";
                         exit;
                     } else {
                         echo "<script>alert('Password is incorrect'); window.location.href = '../../../';</script>";
                         exit;
                     }
                 } else {
-                    echo "<script>alert('Entered email is not verify'); window.location.href = '../../../';</script>";
+                    echo "<script>alert('Entered email is not verified'); window.location.href = '../../../';</script>";
                     exit;
                 }
             } else {
                 echo "<script>alert('No Account found'); window.location.href = '../../../';</script>";
                 exit;
             }
-
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    
             // if ($stmt->rowCount() == 1 && $userRow['password'] == md5($password)) {
             //     $activity = "Has Successfully signed in ";
             //     $user_id = $userRow['id'];
@@ -285,10 +288,7 @@ class ADMIN
             //     echo "<script>alert('Invalid Credentials.'); window.location.href = '../../../';</script>";
             //     exit;
             // }
-        } catch (PDOException $ex) {
-            echo $ex->getMessage();
-        }
-    }
+      
 
     public function adminSignout()
     {
