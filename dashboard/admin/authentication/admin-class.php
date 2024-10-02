@@ -224,7 +224,7 @@ class ADMIN
         ));
 
         if ($exec) {
-            echo "<script>alert('Admin Added Successfully.'); window.location.href = '../../../';</script>";
+            echo "<script>alert('Admin Added Successfully.'); window.location.href = 'http://localhost/ITELEC2-V2/dashboard/admin/authentication';</script>";
             exit;
         } else {
             echo "<script>alert('Error Adding Admin.'); window.location.href = '../../../';</script>";
